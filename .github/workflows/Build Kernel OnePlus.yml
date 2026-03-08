@@ -732,6 +732,8 @@ jobs:
           fi
 
           cd ./common
+          echo "修复内核版本为5.10 与GKI内核代码冲突问题仅支持旧版C库造成的一些bug"
+          sed -i '/__stack_chk_guard/d' drivers/kernelsu/ksuinit.c || true
           GKI_V="${{ env.KANDROID_VERSION }}-${{ env.KERNEL_VERSION }}"
           SUBLEVEL=$(grep '^SUBLEVEL *=' Makefile | head -n1 | cut -d= -f2 | tr -d ' ')
 
